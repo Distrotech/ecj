@@ -21,3 +21,4 @@ install: all
 	install -d ${DESTDIR}${PREFIX}${JARDIR} ${DESTDIR}${PREFIX}/bin
 	install -t ${DESTDIR}${PREFIX}/bin ecj
 	install -m 644 -T ecj.jar ${DESTDIR}${PREFIX}${JARDIR}/${ECJJAR}
+	ln -r -s -f ${DESTDIR}${PREFIX}${JARDIR}/${ECJJAR} ${DESTDIR}${PREFIX}${JARDIR}/ecj.jar
