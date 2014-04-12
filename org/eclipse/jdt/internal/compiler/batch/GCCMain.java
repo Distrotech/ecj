@@ -72,7 +72,6 @@ public class GCCMain extends Main {
 	}
 
 	private void fail(Exception t) {
-		t.printStackTrace();
 		this.logger.logException(t);
 		System.exit(1);
 	}
@@ -101,16 +100,6 @@ public class GCCMain extends Main {
 			}
 			zipStream = new ZipOutputStream(new BufferedOutputStream(os));
 			zipStream.setMethod(ZipOutputStream.STORED);
-			// Sun/OpenJDK require at least one entry in the zip file.
-			ZipEntry entry = new ZipEntry(".dummy");
-			byte[] contents = new byte[0];
-			CRC32 crc = new CRC32();
-			crc.update(contents);
-			entry.setSize(contents.length);
-			entry.setCrc(crc.getValue());
-			zipStream.putNextEntry(entry);
-			zipStream.write(contents);
-			zipStream.closeEntry();
 		}
 		return zipStream;
 	}
@@ -120,16 +109,6 @@ public class GCCMain extends Main {
 			OutputStream os = new FileOutputStream(zipDependencyDestination);
 			zipDependencyStream = new ZipOutputStream(new BufferedOutputStream(os));
 			zipDependencyStream.setMethod(ZipOutputStream.STORED);
-			// Sun/OpenJDK require at least one entry in the zip file.
-			ZipEntry entry = new ZipEntry(".dummy");
-			byte[] contents = new byte[0];
-			CRC32 crc = new CRC32();
-			crc.update(contents);
-			entry.setSize(contents.length);
-			entry.setCrc(crc.getValue());
-			zipDependencyStream.putNextEntry(entry);
-			zipDependencyStream.write(contents);
-			zipDependencyStream.closeEntry();
 		}
 		return zipDependencyStream;
 	}
